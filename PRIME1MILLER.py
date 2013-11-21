@@ -1,8 +1,6 @@
 #Prime Generator max = 1000000000 - TLE
 from random import randint
 
-psyco.full()
-
 def _bits_of_n(n):
     bits = []
 
