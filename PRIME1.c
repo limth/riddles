@@ -1,3 +1,4 @@
+//Prime Generator
 #include "stdio.h"
 #include "stdlib.h"
 #include "math.h"
@@ -69,6 +70,7 @@ void find_in_primary_sieve(
         int intersect,
         int intersect_end,
         int *primes,
+        int primes_len,
         int *found_primes)
 {
     int i;
@@ -82,7 +84,7 @@ void find_in_primary_sieve(
     for(i = intersect; i <= intersect_end; i++)
     {
         primes = *sentinel;
-        while(*primes <= i)
+        while(*primes <= i && primes_len)
         {
             if(*primes == i)
             {
@@ -92,6 +94,7 @@ void find_in_primary_sieve(
             }
 
             primes++;
+            primes_len--;
         }
     }
 }
@@ -186,16 +189,31 @@ int main()
             if(interval_end > max_factor)
                 intersect_end = max_factor;
 
-            find_in_primary_sieve(interval_start, intersect_end, primes, &found_primes);
+            find_in_primary_sieve(
+                    interval_start,
+                    intersect_end,
+                    primes,
+                    primes_count,
+                    &found_primes);
             if(interval_end > max_factor)
             {
-                primality_test(max_factor, interval_end, primes, primes_count, &found_primes);
+                primality_test(
+                        max_factor,
+                        interval_end,
+                        primes,
+                        primes_count,
+                        &found_primes);
             }
         }
 
         if(interval_start >= max_factor)
         {
-            primality_test(interval_start, interval_end, primes, primes_count, &found_primes);
+            primality_test(
+                    interval_start,
+                    interval_end,
+                    primes,
+                    primes_count,
+                    &found_primes);
         }
 
         if(found_primes == 0)
