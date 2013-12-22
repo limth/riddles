@@ -54,7 +54,7 @@ class Shangul:
                         if self.char_map[j + 1][i] == '#':
                             result += 'a'
                             letter_found = True
-                        else:
+                        elif self.char_map[j + 1][i] == '.':
                             result += 'n'
                             letter_found = True
                     j += 1
@@ -69,7 +69,7 @@ class Shangul:
                         
                         if self.char_map[j - 1][i] == '#':
                             result += 'o'
-                    else:
+                    elif self.char_map[j][i + 1] == '.':
                         if self.char_map[j - 1][i] == '#' and \
                            self.char_map[j + 1][i] == '#':
                                result += 'eo'
